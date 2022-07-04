@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """
-This is a module that containts a clas that avoids
-dynmaically created attributes
+Defines class with no class or object attribute
 """
 
-class LockedClass:
-    __slots__ = ['first_name']
 
-    def __init__(self):
-        """ Init method """
-        pass
+class LockedClass():
+    """
+    prevent user from creating new instance attribute dynamically
+    unless attribute is "first_name"""
+
+    __slots__ = "first_name"
