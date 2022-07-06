@@ -1,27 +1,23 @@
 #!/usr/bin/python3
-"""A representation of a Student class"""
+'''
+Class Student that defines a student
+'''
 
 
 class Student:
-    """Class that defines Student"""
+    '''Description of a student'''
 
     def __init__(self, first_name, last_name, age):
+        '''Student contructor'''
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
+        '''Dictionary representation of a student'''
         if type(attrs) is list:
-            dict = {}
-            for attr in attrs:
-                if type(attr) is not str:
-                    return self.__dict__
-            for attr in attrs:
-                if attr in self.__dict__.keys():
-                    dict[attr] = self.__dict__[attr]
-            return dict
-        return self.__dict__
-
-    def reload_from_json(self, json):
-        for k, v in json.items():
-            setattr(self, k, v)
+            d = self.__dict__
+            return(dict(
+                ([name, value] for name, value in d.items() if name in attrs)))
+        else:
+            return self.__dict__
