@@ -1,23 +1,29 @@
 #!/usr/bin/python3
-'''
-Class Student that defines a student
-'''
+
+"""Defines a Pascal's triangle function"""
 
 
-class Student:
-    '''Description of a student'''
+def pascal_triangle(n):
+    """
+    returns a list of lists of
+    integers representing the Pascals triangle of n
+    """
+    p_triangle = [[1], [1, 1]]
 
-    def __init__(self, first_name, last_name, age):
-        '''Student contructor'''
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
+    if n <= 0:
+        return []
 
-    def to_json(self, attrs=None):
-        '''Dictionary representation of a student'''
-        if type(attrs) is list:
-            d = self.__dict__
-            return(dict(
-                ([name, value] for name, value in d.items() if name in attrs)))
-        else:
-            return self.__dict__
+    if n == 1:
+        return [p_triangle[0]]
+
+    for i in range(n-2):
+        base = p_triangle[-1]
+        part = []
+        part.append(base[0])
+        for j in range(len(base)):
+            if j < (len(base) - 1):
+                part.append(base[j] + base[j + 1])
+        part.append(base[-1])
+        p_triangle.append(part)
+
+    return p_triangle
